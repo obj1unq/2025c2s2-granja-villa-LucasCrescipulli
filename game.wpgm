@@ -3,7 +3,7 @@ import personaje.*
 import cultivos.*
 
 program farmville {
-	//  CONFIG	
+	// CONFIG	
 	game.title("La granja")
 	game.height(10)
 	game.width(10)
@@ -11,8 +11,12 @@ program farmville {
 
 	//  VISUALES
  	game.addVisualCharacter(personaje)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
- 	
+
+	// CONTROLES
+	keyboard.m().onPressDo({personaje.sembrarMaiz()})
+	keyboard.t().onPressDo({personaje.sembrarTrigo()})
+	keyboard.o().onPressDo({personaje.sembrarTomaco()})
+
  	//  COMIENZA
 	game.start()
 }
