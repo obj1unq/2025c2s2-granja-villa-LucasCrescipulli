@@ -1,10 +1,19 @@
 import wollok.game.*
 
 class Maiz {
+	// ATRIBUTOS
+
 	var property position = game.at(1, 1)
+	var property estado = bebe
+
+	// COMPORTAMIENTOS
+
 	method image() {
-		// TODO: hacer que devuelva la imagen que corresponde
-		return "corn_baby.png"
+		return estado.image()
+	}
+
+	method crecer(){
+		estado = estado.siguiente()
 	}
 }
 
@@ -19,5 +28,25 @@ class Tomaco {
 	var property position = game.at(1,1)
 	method image(){
 		return "tomaco_baby.png"
+	}
+}
+
+// ESTADOS
+
+object adulta{
+	method image(){
+		return "corn_adult.png"
+	}
+	method siguiente(){
+		return self
+	}
+}
+
+object bebe{
+	method image(){
+		return "corn_baby.png"
+	}
+	method siguiente(){
+		return adulta
 	}
 }

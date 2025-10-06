@@ -11,31 +11,41 @@ object personaje {
 	// ACCIONES
 
 	method sembrarMaiz(){
-		self.validarSiHayCultivo()
+		self.validarSiSePuedeSembrar()
 		const maiz = new Maiz()
 		maiz.position(self.position())
 		game.addVisual(maiz)
 	}
 
 	method sembrarTrigo(){
-		self.validarSiHayCultivo()
+		self.validarSiSePuedeSembrar()
 		const trigo = new Trigo()
 		trigo.position(self.position())
 		game.addVisual(trigo)
 	}
 
 	method sembrarTomaco(){
-		self.validarSiHayCultivo()
+		self.validarSiSePuedeSembrar()
 		const tomaco = new Tomaco()
 		tomaco.position(self.position())
 		game.addVisual(tomaco)
 	}
 
+	method regarPlanta(){
+		self.validarSiHayPlantaParaRegar()
+		const planta = game.uniqueCollider(self)
+		planta.crecer()
+	}
+
 	// VALIDACIONES
 
-	method validarSiHayCultivo(){
+	method validarSiSePuedeSembrar(){
 		if (not game.colliders(self).isEmpty()){
 			self.error("No se puede sembrar acá")
 		}
+	}
+
+	method validarSiHayPlantaParaRegar(){
+
 	}
 }
