@@ -15,6 +15,16 @@ class Maiz {
 	method crecer(){
 		estado = estado.siguiente()
 	}
+	
+	method cosechar(){
+		if (self.sePuedeCosechar()){
+			game.removeVisual(self)
+		}
+	}
+
+	method sePuedeCosechar(){
+		return estado.sePuedeCosechar()
+	}
 }
 
 class Trigo {
@@ -27,6 +37,16 @@ class Trigo {
 
 	method crecer(){
 		estado = estado.siguiente()
+	}
+
+	method cosechar(){
+		if (self.sePuedeCosechar()){
+			game.removeVisual(self)
+		}
+	}
+
+	method sePuedeCosechar(){
+		return estado.sePuedeCosechar()
 	}
 }
 
@@ -48,6 +68,9 @@ class Tomaco {
 			position = game.at(position.x(), 0)
 		}
 	}
+	method cosechar(){
+		game.removeVisual(self)
+	}
 }
 
 // ESTADOS
@@ -58,6 +81,9 @@ object maizAdulto{
 	method siguiente(){
 		return self
 	}
+	method sePuedeCosechar(){
+		return true
+	}
 }
 
 object maizBebe{
@@ -66,6 +92,9 @@ object maizBebe{
 	}
 	method siguiente(){
 		return maizAdulto
+	}
+	method sePuedeCosechar(){
+		return false
 	}
 }
 
@@ -76,6 +105,9 @@ object trigo0{
 	method siguiente(){
 		return trigo1
 	}
+	method sePuedeCosechar(){
+		return false
+	}
 }
 
 object trigo1{
@@ -84,6 +116,9 @@ object trigo1{
 	}
 	method siguiente(){
 		return trigo2
+	}
+	method sePuedeCosechar(){
+		return false
 	}
 }
 
@@ -94,6 +129,9 @@ object trigo2{
 	method siguiente(){
 		return trigo3
 	}
+	method sePuedeCosechar(){
+		return true
+	}
 }
 
 object trigo3{
@@ -102,5 +140,8 @@ object trigo3{
 	}
 	method siguiente(){
 		return trigo0
+	}
+	method sePuedeCosechar(){
+		return true
 	}
 }

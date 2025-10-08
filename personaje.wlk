@@ -7,6 +7,7 @@ object personaje {
 
 	var property position = game.center()
 	const property image = "fplayer.png"
+	const plantasCosechadas = #{}
 	
 	// ACCIONES
 
@@ -37,6 +38,15 @@ object personaje {
 		planta.crecer()
 	}
 
+	method cosecharPlanta(){
+		self.validarSiHayPlantaParaCosechar()
+		const planta = game.uniqueCollider(self)
+		planta.cosechar()
+		// cuidado con esto plantasCosechadas.add(planta)
+		// si la planta no está madura, la voy a contar igual
+		// porque hay planta, pero no está lista.
+	}
+
 	// VALIDACIONES
 
 	method validarSiSePuedeSembrar(){
@@ -46,6 +56,14 @@ object personaje {
 	}
 
 	method validarSiHayPlantaParaRegar(){
+		if (game.colliders(self).isEmpty()){
+			self.error("No hay plantas para regar acá")
+		}
+	}
 
+	method validarSiHayPlantaParaCosechar(){
+		if (game.colliders(self).isEmpty()){
+			self.error("No hay plantas para cosechar acá")
+		}
 	}
 }

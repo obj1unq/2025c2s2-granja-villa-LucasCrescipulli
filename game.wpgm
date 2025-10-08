@@ -17,6 +17,7 @@ program farmville {
 	keyboard.t().onPressDo({personaje.sembrarTrigo()})
 	keyboard.o().onPressDo({personaje.sembrarTomaco()})
 	keyboard.r().onPressDo({personaje.regarPlanta()})
+	keyboard.c().onPressDo({personaje.cosecharPlanta()})
 
  	//  COMIENZA
 	game.start()
