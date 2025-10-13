@@ -67,6 +67,6 @@ object gestorPosiciones{
     }
 
     method plantasEn(position){
-        return self.lindantesConPlantas(position).map({posicion => game.getObjectsIn(posicion)})
+        return self.lindantesConPlantas(position).map({posicion => game.getObjectsIn(posicion)}).flatten()
     }
 }
