@@ -57,6 +57,18 @@ object personaje {
 		game.say(self, "tengo " + plantasCosechadas.size() + " plantas y " + oro + " monedas de oro")
 	}
 
+	method dejarAspersor(){
+		self.validarSiSePuedeDejarAspersor()
+		const aspersor = new Aspersor()
+		aspersor.position(self.position())
+		game.addVisual(aspersor)
+		game.onTick(1000, "Aspersor", {aspersor.regar()})
+	}
+
+	method esPlanta(){
+		return false
+	}
+
 	// VALIDACIONES
 
 	method validarSiSePuedeSembrar(){
@@ -76,4 +88,11 @@ object personaje {
 			self.error("No hay plantas para cosechar acá")
 		}
 	}
+
+	method validarSiSePuedeDejarAspersor(){
+		if (not game.colliders(self).isEmpty()){
+			self.error("No se puede dejar un aspersor acá")
+		}
+	}
 }
+

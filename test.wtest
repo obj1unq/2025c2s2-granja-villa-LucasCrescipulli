@@ -1,0 +1,10 @@
+import wollok.game.*
+import cultivos.*
+import personaje.*
+import direcciones.*
+
+describe "Test de direcciones"{
+    test "A ver si funcionan las lindantes"{
+        assert.that(gestorPosiciones.lindantesConPlantas(game.center()).isEmpty())
+    }
+}

@@ -1,4 +1,5 @@
 import wollok.game.*
+import direcciones.*
 
 class Maiz {
 	// ATRIBUTOS
@@ -29,6 +30,10 @@ class Maiz {
 	method oroQueOtorga(){
 		return 150
 	}
+
+	method esPlanta(){
+		return true
+	}
 }
 
 class Trigo {
@@ -56,6 +61,10 @@ class Trigo {
 	method oroQueOtorga(){
 		return estado.oroQueOtorga()
 	}
+
+	method esPlanta(){
+		return true
+	}
 }
 
 class Tomaco {
@@ -81,6 +90,26 @@ class Tomaco {
 	}
 	method oroQueOtorga(){
 		return 80
+	}
+	method esPlanta(){
+		return true
+	}
+}
+
+class Aspersor{
+	var property position = game.at(1,1)
+	const gestor = gestorPosiciones
+	method image(){
+		return "aspersor.png"
+	}
+	method plantasAlrededor(){
+		return gestor.plantasEn(self.position())
+	}
+	method regar(){
+		self.plantasAlrededor().forEach({planta => planta.crecer()})
+	}
+	method esPlanta(){
+		return false
 	}
 }
 
