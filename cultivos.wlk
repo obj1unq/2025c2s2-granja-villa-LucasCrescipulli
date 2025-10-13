@@ -25,6 +25,10 @@ class Maiz {
 	method sePuedeCosechar(){
 		return estado.sePuedeCosechar()
 	}
+
+	method oroQueOtorga(){
+		return 150
+	}
 }
 
 class Trigo {
@@ -48,6 +52,10 @@ class Trigo {
 	method sePuedeCosechar(){
 		return estado.sePuedeCosechar()
 	}
+
+	method oroQueOtorga(){
+		return estado.oroQueOtorga()
+	}
 }
 
 class Tomaco {
@@ -70,6 +78,9 @@ class Tomaco {
 	}
 	method cosechar(){
 		game.removeVisual(self)
+	}
+	method oroQueOtorga(){
+		return 80
 	}
 }
 
@@ -132,6 +143,9 @@ object trigo2{
 	method sePuedeCosechar(){
 		return true
 	}
+	method oroQueOtorga(){
+		return 100
+	}
 }
 
 object trigo3{
@@ -143,5 +157,8 @@ object trigo3{
 	}
 	method sePuedeCosechar(){
 		return true
+	}
+	method oroQueOtorga(){
+		return 200
 	}
 }

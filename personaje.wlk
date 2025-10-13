@@ -7,7 +7,8 @@ object personaje {
 
 	var property position = game.center()
 	const property image = "fplayer.png"
-	const plantasCosechadas = #{}
+	const plantasCosechadas = []
+	var property oro = 0
 	
 	// ACCIONES
 
@@ -42,9 +43,18 @@ object personaje {
 		self.validarSiHayPlantaParaCosechar()
 		const planta = game.uniqueCollider(self)
 		planta.cosechar()
-		// cuidado con esto plantasCosechadas.add(planta)
-		// si la planta no está madura, la voy a contar igual
-		// porque hay planta, pero no está lista.
+		if (game.colliders(self).isEmpty()){
+			plantasCosechadas.add(planta)
+		}
+	}
+
+	method venderPlantas(){
+		oro += plantasCosechadas.sum({planta => planta.oroQueOtorga()})
+		plantasCosechadas.clear()
+	}
+
+	method mostrarOroYPlantas(){
+		game.say(self, "tengo " + plantasCosechadas.size() + " plantas y " + oro + " monedas de oro")
 	}
 
 	// VALIDACIONES
