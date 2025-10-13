@@ -1,3 +1,4 @@
+import direcciones.*
 import wollok.game.*
 import cultivos.*
 
@@ -49,7 +50,9 @@ object personaje {
 	}
 
 	method venderPlantas(){
-		oro += plantasCosechadas.sum({planta => planta.oroQueOtorga()})
+		self.validarSiEstoyEnElMercado()
+		self.validarSiElMercadoTieneOro()
+		oro += plantasCosechadas.sum({planta => planta.oroQueOtorga()}) // subtarea la suma!
 		plantasCosechadas.clear()
 	}
 
@@ -68,6 +71,12 @@ object personaje {
 	method esPlanta(){
 		return false
 	}
+
+	method esMercado(){
+		return false
+	}
+
+	method crecer(){}
 
 	// VALIDACIONES
 
@@ -92,6 +101,12 @@ object personaje {
 	method validarSiSePuedeDejarAspersor(){
 		if (not game.colliders(self).isEmpty()){
 			self.error("No se puede dejar un aspersor acá")
+		}
+	}
+
+	method validarSiEstoyEnElMercado(){
+		if (not gestorPosiciones.hayMercadoEn(self.position())){
+			self.error("No puedo vender si no estoy en un mercado")
 		}
 	}
 }
