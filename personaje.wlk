@@ -52,8 +52,12 @@ object personaje {
 	method venderPlantas(){
 		self.validarSiEstoyEnElMercado()
 		self.validarSiElMercadoTieneOro()
-		oro += plantasCosechadas.sum({planta => planta.oroQueOtorga()}) // subtarea la suma!
+		oro += self.cantidadDeOroSegunPlantasCosechadas()
 		plantasCosechadas.clear()
+	}
+
+	method cantidadDeOroSegunPlantasCosechadas(){
+		return plantasCosechadas.sum({planta => planta.oroQueOtorga()})
 	}
 
 	method mostrarOroYPlantas(){
@@ -108,6 +112,12 @@ object personaje {
 		if (not gestorPosiciones.hayMercadoEn(self.position())){
 			self.error("No puedo vender si no estoy en un mercado")
 		}
+	}
+
+	method validarSiElMercadoTieneOro(){
+		/* 	Validar si el mercado que está en la misma posición que el personaje tiene oro suficiente para
+			comprar todas las plantas que lleva el personaje. */
+		// if ()
 	}
 }
 

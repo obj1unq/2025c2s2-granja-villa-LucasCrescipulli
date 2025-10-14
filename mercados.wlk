@@ -1,4 +1,5 @@
 import wollok.game.*
+import randomizer.*
 
 class Mercado{
     var property position = game.at(1,1)
@@ -7,5 +8,13 @@ class Mercado{
 
     method image(){
         return "market.png"
+    }
+}
+
+object mercadoFactory{
+    const mercados = []
+    method crear(){
+        const mercado = new Mercado(position = randomizer.emptyPosition())
+        mercados.add(mercado)
     }
 }
