@@ -50,8 +50,8 @@ object personaje {
 	}
 
 	method venderPlantas(){
-		self.validarSiEstoyEnElMercado()
-		self.validarSiElMercadoTieneOro()
+		// self.validarSiEstoyEnElMercado()
+		// self.validarSiElMercadoTieneOro()
 		oro += self.cantidadDeOroSegunPlantasCosechadas()
 		plantasCosechadas.clear()
 	}
@@ -82,6 +82,12 @@ object personaje {
 
 	method crecer(){}
 
+	// GETTERS
+
+	method plantasCosechadas(){
+		return plantasCosechadas
+	}
+
 	// VALIDACIONES
 
 	method validarSiSePuedeSembrar(){
@@ -91,7 +97,7 @@ object personaje {
 	}
 
 	method validarSiHayPlantaParaRegar(){
-		if (game.colliders(self).isEmpty()){
+		if (not gestorPosiciones.hayPlantaEn(self.position())){
 			self.error("No hay plantas para regar acá")
 		}
 	}

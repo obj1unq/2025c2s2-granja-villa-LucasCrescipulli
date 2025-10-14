@@ -3,37 +3,128 @@ import cultivos.*
 import personaje.*
 import direcciones.*
 
-describe "Tests de la Granja Villa"{
+describe "Tests de siembra"{
     method initialize() {
       personaje.position(game.at(3,3))
     }
     test "Sembrar Maiz"{
         personaje.sembrarMaiz()
-        assert.equals(game.getObjectsIn(game.at(3,3)), a Maiz)
+        assert.equals("corn_baby.png", game.uniqueCollider(personaje).image())
     }
     test "Sembrar Trigo"{
-        personaje.sembrarTomaco()
-        assert
+        personaje.sembrarTrigo()
+        assert.equals("wheat_0.png", game.uniqueCollider(personaje).image())
     }
 
     test "Sembrar Tomaco"{
-
+        personaje.sembrarTomaco()
+        assert.equals("tomaco_baby.png", game.uniqueCollider(personaje).image())
     }
 }
 
 describe "Tests de riego"{
     method initialize(){
-
+        personaje.position(game.at(3,3))
     }
-    test "Crecimiento del maíz"{
-
+    test "riego del maíz"{
+        personaje.sembrarMaiz()
+        personaje.regarPlanta()
+        assert.equals("corn_adult.png", game.uniqueCollider(personaje).image())
     }
 
-    test "Crecimiento del trigo"{
-
+    test "riego del trigo"{
+        personaje.sembrarTrigo()
+        personaje.regarPlanta()
+        assert.equals("wheat_1.png", game.uniqueCollider(personaje).image())
+        personaje.regarPlanta()
+        assert.equals("wheat_2.png", game.uniqueCollider(personaje).image())
+        personaje.regarPlanta()
+        assert.equals("wheat_3.png", game.uniqueCollider(personaje).image())
+        personaje.regarPlanta()
+        assert.equals("wheat_0.png", game.uniqueCollider(personaje).image())
     }
     
-    test "Crecimiento del tomaco"{
+    test "riego del tomaco"{
+        personaje.sembrarTomaco()
+        personaje.regarPlanta()
+        assert.that(game.getObjectsIn(personaje.position()).isEmpty())
+        personaje.position(game.at(3,4))
+        assert.equals("tomaco.png", game.uniqueCollider(personaje).image())
+    }
+}
+
+describe "Tests de cosecha"{
+    method initialize() {
+      personaje.position(game.at(3,3))
+    }
+
+    test "cosecha del maíz"{
+        assert.that(personaje.plantasCosechadas().isEmpty())
+        personaje.sembrarMaiz()
+        personaje.regarPlanta()
+        personaje.cosecharPlanta()
+        assert.notThat(personaje.plantasCosechadas().isEmpty())
+    }
+
+    test "cosecha del trigo"{
+        assert.that(personaje.plantasCosechadas().isEmpty())
+        personaje.sembrarTrigo()
+        personaje.regarPlanta()
+        personaje.cosecharPlanta() // la planta de trigo no se puede cosechar porque está en fase 1
+        assert.that(personaje.plantasCosechadas().isEmpty())
+        personaje.regarPlanta()
+        personaje.cosecharPlanta() // ahora sí se puede cosechar porque está en fase 2
+        assert.notThat(personaje.plantasCosechadas().isEmpty())
+    }
+
+    test "cosecha del tomaco"{
+        assert.that(personaje.plantasCosechadas().isEmpty())
+        personaje.sembrarTomaco()
+        personaje.regarPlanta()
+        personaje.position(game.at(3,4))
+        personaje.cosecharPlanta()
+        assert.notThat(personaje.plantasCosechadas().isEmpty())
+    }
+}
+
+describe "tests de venta"{
+    method initialize() {
+      personaje.position(game.at(3,3))
+    }
+
+    test "test de venta del maíz"{
+        personaje.sembrarMaiz()
+        personaje.regarPlanta()
+        personaje.cosecharPlanta()
+        personaje.venderPlantas()
+        assert.equals(150, personaje.oro())
+        assert.that(personaje.plantasCosechadas().isEmpty())
+    }
+
+    test "test de venta del trigo"{
+        personaje.sembrarTrigo()
+        personaje.regarPlanta(); personaje.regarPlanta()
+        personaje.cosecharPlanta()
+        personaje.venderPlantas()
+        assert.equals(100, personaje.oro())
+        assert.that(personaje.plantasCosechadas().isEmpty())
         
+        personaje.oro(0)
+        personaje.sembrarTrigo()
+        personaje.regarPlanta(); personaje.regarPlanta(); personaje.regarPlanta()
+        personaje.cosecharPlanta()
+        personaje.venderPlantas()
+        assert.equals(200, personaje.oro())
+        assert.that(personaje.plantasCosechadas().isEmpty())
+    }
+
+    test "test de venta del tomaco"{
+        personaje.sembrarTomaco()
+        personaje.regarPlanta()
+        personaje.position(game.at(3,4))
+        personaje.cosecharPlanta()
+        personaje.venderPlantas()
+        assert.equals(80, personaje.oro())
+        assert.that(personaje.plantasCosechadas().isEmpty())
     }
 }
