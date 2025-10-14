@@ -1,6 +1,7 @@
 import wollok.game.*
 import personaje.*
 import cultivos.*
+import direcciones.*
 
 program farmville {
 	// CONFIG	
@@ -11,6 +12,7 @@ program farmville {
 
 	//  VISUALES
  	game.addVisualCharacter(personaje)
+	gestorPosiciones.crearMercados(3)
 
 	// CONTROLES
 	keyboard.m().onPressDo({personaje.sembrarMaiz()})

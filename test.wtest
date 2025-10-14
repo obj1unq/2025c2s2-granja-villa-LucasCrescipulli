@@ -3,8 +3,37 @@ import cultivos.*
 import personaje.*
 import direcciones.*
 
-describe "Test de direcciones"{
-    test "A ver si funcionan las lindantes"{
-        assert.that(gestorPosiciones.lindantesConPlantas(game.center()).isEmpty())
+describe "Tests de la Granja Villa"{
+    method initialize() {
+      personaje.position(game.at(3,3))
+    }
+    test "Sembrar Maiz"{
+        personaje.sembrarMaiz()
+        assert.equals(game.getObjectsIn(game.at(3,3)), a Maiz)
+    }
+    test "Sembrar Trigo"{
+        personaje.sembrarTomaco()
+        assert
+    }
+
+    test "Sembrar Tomaco"{
+
+    }
+}
+
+describe "Tests de riego"{
+    method initialize(){
+
+    }
+    test "Crecimiento del maíz"{
+
+    }
+
+    test "Crecimiento del trigo"{
+
+    }
+    
+    test "Crecimiento del tomaco"{
+        
     }
 }

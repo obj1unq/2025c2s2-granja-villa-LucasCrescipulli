@@ -111,6 +111,7 @@ class Aspersor{
 	method esPlanta(){
 		return false
 	}
+	method crecer(){}
 }
 
 // ESTADOS

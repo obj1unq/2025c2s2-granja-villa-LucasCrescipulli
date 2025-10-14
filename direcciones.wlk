@@ -88,6 +88,15 @@ object gestorPosiciones{
         return self.lindantesConPlantas(position).map({posicion => game.getObjectsIn(posicion)}).flatten()
     }
 
+    method crearMercados(cantidad){
+        var mercadosPendientes = cantidad
+        if (mercadosPendientes != 0){
+            mercadoFactory.crear()
+            mercadosPendientes -= 1
+            self.crearMercados(mercadosPendientes)
+        }
+    }
+
     method hayMercadoEn(position){
         return 
     }

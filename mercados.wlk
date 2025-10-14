@@ -15,6 +15,7 @@ object mercadoFactory{
     const mercados = []
     method crear(){
         const mercado = new Mercado(position = randomizer.emptyPosition())
+        game.addVisual(mercado)
         mercados.add(mercado)
     }
 }
