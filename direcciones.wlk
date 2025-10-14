@@ -52,7 +52,7 @@ object noroeste{
 
 object gestorPosiciones{
 
-    var mercadosEnElTablero = []
+    // var mercadosEnElTablero = []
 
     method mercadosEnElTablero(){
         return 
