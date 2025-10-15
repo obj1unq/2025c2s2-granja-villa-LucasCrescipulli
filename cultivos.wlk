@@ -64,15 +64,16 @@ class Trigo {
 
 class Tomaco {
 	var property position = game.at(1,1)
-	var property image = "tomaco_baby.png"
+	var property estado = tomacoBaby
 
-	method image(_image){
-		image = _image
+	method image(){
+		return estado.image()
 	}
 
 	method crecer(){
-		self.image("tomaco.png")
-
+		self.validarMovimiento()
+		self.validarCrecimiento()
+		estado = estado.siguiente()
 		if (position.y() != game.height() - 1){
 			position = position.up(1)
 		}
@@ -85,6 +86,16 @@ class Tomaco {
 	}
 	method oroQueOtorga(){
 		return 80
+	}
+	method validarMovimiento(){
+		if (not game.getObjectsIn(position.up(1)).isEmpty()){
+			self.error("No puede crecer hacia arriba")
+		}
+	}
+	method validarCrecimiento(){
+		if (not estado.puedeCrecer()){
+			self.error("No puede crecer más")
+		}
 	}
 }
 
@@ -140,6 +151,34 @@ object maizBebe{
 		return maizAdulto
 	}
 	method sePuedeCosechar(){
+		return false
+	}
+}
+
+object tomacoBaby{
+	method image(){
+		return "tomaco_baby.png"
+	}
+	method siguiente(){
+		return tomacoAdulto
+	}
+	method sePuedeCosechar(){
+		return false
+	}
+	method puedeCrecer(){
+		return true
+	}
+}
+
+object tomacoAdulto{
+	method image(){
+		return "tomaco.png"
+	}
+	method siguiente(){}
+	method sePuedeCosechar(){
+		return true
+	}
+	method puedeCrecer(){
 		return false
 	}
 }
