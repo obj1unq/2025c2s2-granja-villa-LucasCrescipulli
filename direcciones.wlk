@@ -98,6 +98,10 @@ object gestorPosiciones{
     }
 
     method hayMercadoEn(position){
-        return 
+        return game.getObjectsIn(position).any({objeto => objeto.esMercado()})
+    }
+
+    method mercadoEn(position){
+        return game.getObjectsIn(position).find({objeto => objeto.esMercado()})
     }
 }

@@ -50,8 +50,9 @@ object personaje {
 	}
 
 	method venderPlantas(){
-		// self.validarSiEstoyEnElMercado()
-		// self.validarSiElMercadoTieneOro()
+		self.validarSiEstoyEnElMercado()
+		self.validarSiElMercadoTieneOro()
+		self.venderlePlantasAlMercado(gestorPosiciones.mercadoEn(self.position()))
 		oro += self.cantidadDeOroSegunPlantasCosechadas()
 		plantasCosechadas.clear()
 	}
@@ -62,6 +63,11 @@ object personaje {
 
 	method mostrarOroYPlantas(){
 		game.say(self, "tengo " + plantasCosechadas.size() + " plantas y " + oro + " monedas de oro")
+	}
+
+	method venderlePlantasAlMercado(mercado){
+		mercado.oro(self.cantidadDeOroSegunPlantasCosechadas())
+		mercado.mercaderia(self.plantasCosechadas())
 	}
 
 	method dejarAspersor(){
@@ -123,7 +129,9 @@ object personaje {
 	method validarSiElMercadoTieneOro(){
 		/* 	Validar si el mercado que está en la misma posición que el personaje tiene oro suficiente para
 			comprar todas las plantas que lleva el personaje. */
-		// if ()
+		if (gestorPosiciones.mercadoEn(self.position()).oro() < self.cantidadDeOroSegunPlantasCosechadas()){
+			self.error("El mercado no tiene suficiente oro para comprar mis plantas")
+		}
 	}
 }
 

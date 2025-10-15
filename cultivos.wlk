@@ -34,6 +34,10 @@ class Maiz {
 	method esPlanta(){
 		return true
 	}
+
+	method esMercado(){
+		return false
+	}
 }
 
 class Trigo {
@@ -65,6 +69,10 @@ class Trigo {
 	method esPlanta(){
 		return true
 	}
+
+	method esMercado(){
+		return false
+	}
 }
 
 class Tomaco {
@@ -94,6 +102,9 @@ class Tomaco {
 	method esPlanta(){
 		return true
 	}
+	method esMercado(){
+		return false
+	}
 }
 
 class Aspersor{
@@ -112,6 +123,9 @@ class Aspersor{
 		return false
 	}
 	method crecer(){}
+	method esMercado(){
+		return false
+	}
 }
 
 // ESTADOS
