@@ -21,21 +21,19 @@ class Mercado{
     method mercaderia(_mercaderia){
         mercaderia.addAll(_mercaderia)
     }
-
-    method esPlanta(){
-        return false
-    }
-
-    method esMercado(){
-        return true
-    }
 }
 
-object mercadoFactory{
+object mercadosDeLaGranja{
     const mercados = []
     method crear(){
         const mercado = new Mercado(position = randomizer.emptyPosition())
         game.addVisual(mercado)
         mercados.add(mercado)
+    }
+    method hayMercado(posicion){
+        return mercados.any({mercado => mercado.position()==posicion})
+    }
+    method mercadoEn(posicion){
+        return mercados.find({mercado => mercado.position()==posicion})
     }
 }

@@ -52,12 +52,6 @@ object noroeste{
 
 object gestorPosiciones{
 
-    // var mercadosEnElTablero = []
-
-    method mercadosEnElTablero(){
-        return 
-    }
-
     method direcciones(){
         // retorna un set con todas las direcciones lindantes (ortogonales y diagonales)
         return #{norte, este, sur, oeste, noreste, sureste, suroeste, noroeste}
@@ -91,17 +85,9 @@ object gestorPosiciones{
     method crearMercados(cantidad){
         var mercadosPendientes = cantidad
         if (mercadosPendientes != 0){
-            mercadoFactory.crear()
+            mercadosDeLaGranja.crear()
             mercadosPendientes -= 1
             self.crearMercados(mercadosPendientes)
         }
-    }
-
-    method hayMercadoEn(position){
-        return game.getObjectsIn(position).any({objeto => objeto.esMercado()})
-    }
-
-    method mercadoEn(position){
-        return game.getObjectsIn(position).find({objeto => objeto.esMercado()})
     }
 }

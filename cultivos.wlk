@@ -128,6 +128,19 @@ class Aspersor{
 	}
 }
 
+object aspersoresDeLaGranja{
+	const aspersores = []
+	method nuevoAspersor(aspersor){
+		aspersores.add(aspersor)
+	}
+	method hayAspersor(posicion){
+		return aspersores.any({aspersor => aspersor.position()==posicion})
+	}
+	method aspersorEn(posicion){
+		return aspersores.find({aspersor => aspersor.position()==posicion})
+	}
+}
+
 // ESTADOS
 object maizAdulto{
 	method image(){
@@ -204,5 +217,18 @@ object trigo3{
 	}
 	method oroQueOtorga(){
 		return 200
+	}
+}
+
+object cultivosDeLaGranja{
+	const cultivos = []
+	method nuevoCultivo(cultivo){
+		cultivos.add(cultivo)
+	}
+	method hayPlanta(posicion){
+		return cultivos.any({cultivo => cultivo.position()==posicion})
+	}
+	method plantaEn(posicion){
+		return cultivos.find({cultivo => cultivo.position()==posicion})
 	}
 }

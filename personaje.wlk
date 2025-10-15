@@ -1,3 +1,4 @@
+import mercados.*
 import direcciones.*
 import wollok.game.*
 import cultivos.*
@@ -18,6 +19,7 @@ object personaje {
 		const maiz = new Maiz()
 		maiz.position(self.position())
 		game.addVisual(maiz)
+		cultivosDeLaGranja.nuevoCultivo(maiz)
 	}
 
 	method sembrarTrigo(){
@@ -25,6 +27,7 @@ object personaje {
 		const trigo = new Trigo()
 		trigo.position(self.position())
 		game.addVisual(trigo)
+		cultivosDeLaGranja.nuevoCultivo(trigo)
 	}
 
 	method sembrarTomaco(){
@@ -32,17 +35,18 @@ object personaje {
 		const tomaco = new Tomaco()
 		tomaco.position(self.position())
 		game.addVisual(tomaco)
+		cultivosDeLaGranja.nuevoCultivo(tomaco)
 	}
 
 	method regarPlanta(){
 		self.validarSiHayPlantaParaRegar()
-		const planta = game.uniqueCollider(self)
+		const planta = cultivosDeLaGranja.plantaEn(self.position())
 		planta.crecer()
 	}
 
 	method cosecharPlanta(){
 		self.validarSiHayPlantaParaCosechar()
-		const planta = game.uniqueCollider(self)
+		const planta = cultivosDeLaGranja.plantaEn(self.position())
 		planta.cosechar()
 		if (game.colliders(self).isEmpty()){
 			plantasCosechadas.add(planta)
@@ -52,7 +56,7 @@ object personaje {
 	method venderPlantas(){
 		self.validarSiEstoyEnElMercado()
 		self.validarSiElMercadoTieneOro()
-		self.venderlePlantasAlMercado(gestorPosiciones.mercadoEn(self.position()))
+		self.venderlePlantasAlMercado(mercadosDeLaGranja.mercadoEn(self.position()))
 		oro += self.cantidadDeOroSegunPlantasCosechadas()
 		plantasCosechadas.clear()
 	}
@@ -76,14 +80,7 @@ object personaje {
 		aspersor.position(self.position())
 		game.addVisual(aspersor)
 		game.onTick(1000, "Aspersor", {aspersor.regar()})
-	}
-
-	method esPlanta(){
-		return false
-	}
-
-	method esMercado(){
-		return false
+		aspersoresDeLaGranja.nuevoAspersor(aspersor)
 	}
 
 	method crecer(){}
@@ -103,13 +100,13 @@ object personaje {
 	}
 
 	method validarSiHayPlantaParaRegar(){
-		if (not gestorPosiciones.hayPlantaEn(self.position())){
+		if (not cultivosDeLaGranja.hayPlanta(self.position())){
 			self.error("No hay plantas para regar acá")
 		}
 	}
 
 	method validarSiHayPlantaParaCosechar(){
-		if (game.colliders(self).isEmpty()){
+		if (not cultivosDeLaGranja.hayPlanta(self.position())){
 			self.error("No hay plantas para cosechar acá")
 		}
 	}
@@ -121,7 +118,7 @@ object personaje {
 	}
 
 	method validarSiEstoyEnElMercado(){
-		if (not gestorPosiciones.hayMercadoEn(self.position())){
+		if (not mercadosDeLaGranja.hayMercado(self.position())){
 			self.error("No puedo vender si no estoy en un mercado")
 		}
 	}
@@ -129,7 +126,7 @@ object personaje {
 	method validarSiElMercadoTieneOro(){
 		/* 	Validar si el mercado que está en la misma posición que el personaje tiene oro suficiente para
 			comprar todas las plantas que lleva el personaje. */
-		if (gestorPosiciones.mercadoEn(self.position()).oro() < self.cantidadDeOroSegunPlantasCosechadas()){
+		if (mercadosDeLaGranja.mercadoEn(self.position()).oro() < self.cantidadDeOroSegunPlantasCosechadas()){
 			self.error("El mercado no tiene suficiente oro para comprar mis plantas")
 		}
 	}
