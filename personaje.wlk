@@ -54,6 +54,7 @@ object personaje {
 	}
 
 	method venderPlantas(){
+		self.validarSiTienePlantasParaVender()
 		self.validarSiEstoyEnElMercado()
 		self.validarSiElMercadoTieneOro()
 		self.venderlePlantasAlMercado(mercadosDeLaGranja.mercadoEn(self.position()))
@@ -100,13 +101,13 @@ object personaje {
 	}
 
 	method validarSiHayPlantaParaRegar(){
-		if (not cultivosDeLaGranja.hayPlanta(self.position())){
+		if (not cultivosDeLaGranja.hayPlanta(position)){
 			self.error("No hay plantas para regar acá")
 		}
 	}
 
 	method validarSiHayPlantaParaCosechar(){
-		if (not cultivosDeLaGranja.hayPlanta(self.position())){
+		if (not cultivosDeLaGranja.hayPlanta(position)){
 			self.error("No hay plantas para cosechar acá")
 		}
 	}
@@ -118,7 +119,7 @@ object personaje {
 	}
 
 	method validarSiEstoyEnElMercado(){
-		if (not mercadosDeLaGranja.hayMercado(self.position())){
+		if (not mercadosDeLaGranja.hayMercado(position)){
 			self.error("No puedo vender si no estoy en un mercado")
 		}
 	}
@@ -126,8 +127,14 @@ object personaje {
 	method validarSiElMercadoTieneOro(){
 		/* 	Validar si el mercado que está en la misma posición que el personaje tiene oro suficiente para
 			comprar todas las plantas que lleva el personaje. */
-		if (mercadosDeLaGranja.mercadoEn(self.position()).oro() < self.cantidadDeOroSegunPlantasCosechadas()){
+		if (mercadosDeLaGranja.mercadoEn(position).oro() < self.cantidadDeOroSegunPlantasCosechadas()){
 			self.error("El mercado no tiene suficiente oro para comprar mis plantas")
+		}
+	}
+
+	method validarSiTienePlantasParaVender(){
+		if (self.plantasCosechadas().isEmpty()){
+			self.error("No tengo nada para vender")
 		}
 	}
 }

@@ -21,6 +21,9 @@ class Maiz {
 		if (self.sePuedeCosechar()){
 			game.removeVisual(self)
 		}
+		else {
+			self.error("No está listo para cosechar")
+		}
 	}
 
 	method sePuedeCosechar(){
@@ -29,14 +32,6 @@ class Maiz {
 
 	method oroQueOtorga(){
 		return 150
-	}
-
-	method esPlanta(){
-		return true
-	}
-
-	method esMercado(){
-		return false
 	}
 }
 
@@ -65,14 +60,6 @@ class Trigo {
 	method oroQueOtorga(){
 		return estado.oroQueOtorga()
 	}
-
-	method esPlanta(){
-		return true
-	}
-
-	method esMercado(){
-		return false
-	}
 }
 
 class Tomaco {
@@ -99,12 +86,6 @@ class Tomaco {
 	method oroQueOtorga(){
 		return 80
 	}
-	method esPlanta(){
-		return true
-	}
-	method esMercado(){
-		return false
-	}
 }
 
 class Aspersor{
@@ -123,9 +104,6 @@ class Aspersor{
 		return false
 	}
 	method crecer(){}
-	method esMercado(){
-		return false
-	}
 }
 
 object aspersoresDeLaGranja{

@@ -1,3 +1,4 @@
+import cultivos.*
 import wollok.game.*
 import mercados.*
 import randomizer.*
@@ -62,17 +63,9 @@ object gestorPosiciones{
         return self.direcciones().map({direccion => direccion.position(position)})
     }
 
-    method hayPlantaEn(position){
-        /*  Retorna un booleano para determinar si hay una planta en la posición dada.
-            Primero se obtienen los objetos de una posición, para luego filtrarlos en función de si
-            alguno es una planta. Si esa colección está vacía, entonces se la niega para concluir QUE SÍ. */
-
-        return not game.getObjectsIn(position).filter({objeto => objeto.esPlanta()}).isEmpty()
-    }
-
     method lindantesConPlantas(position){
         // retorna un set con las posiciones lindantes en las cuales hay una planta
-        return self.lindantes(position).filter({posicion => self.hayPlantaEn(posicion)})
+        return self.lindantes(position).filter({posicion => cultivosDeLaGranja.hayPlanta(posicion)})
     }
 
     method plantasEn(position){
