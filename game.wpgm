@@ -1,9 +1,10 @@
 import wollok.game.*
 import personaje.*
 import cultivos.*
+import direcciones.*
 
 program farmville {
-	//  CONFIG	
+	// CONFIG	
 	game.title("La granja")
 	game.height(10)
 	game.width(10)
@@ -11,8 +12,18 @@ program farmville {
 
 	//  VISUALES
  	game.addVisualCharacter(personaje)
- 	game.addVisual(new Maiz()) // Se agrega a modo de prueba
- 	
+	gestorPosiciones.crearMercados(3)
+
+	// CONTROLES
+	keyboard.m().onPressDo({personaje.sembrarMaiz()})
+	keyboard.t().onPressDo({personaje.sembrarTrigo()})
+	keyboard.o().onPressDo({personaje.sembrarTomaco()})
+	keyboard.r().onPressDo({personaje.regarPlanta()})
+	keyboard.c().onPressDo({personaje.cosecharPlanta()})
+	keyboard.v().onPressDo({personaje.venderPlantas()})
+	keyboard.space().onPressDo({personaje.mostrarOroYPlantas()})
+	keyboard.a().onPressDo({personaje.dejarAspersor()})
+
  	//  COMIENZA
 	game.start()
 }
